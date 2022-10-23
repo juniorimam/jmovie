@@ -1,0 +1,28 @@
+{
+    "env": {
+        "browser": true,
+        "es2021": true,
+        "node": true
+    },
+    "extends": "airbnb-base",
+    "overrides": [
+    ],
+    "parserOptions": {
+        "ecmaVersion": "latest",
+        "sourceType": "module"
+    },
+    "rules": {
+        "quotes": ["error", "double", { "allowTemplateLiterals": true }],
+        "object-curly-newline": ["error", { "ObjectExpression": "always", "ObjectPattern": { "multiline": true } }],
+        "camelcase": ["error", {"properties": "never","ignoreDestructuring": true, "allow": ["poster_path", "vote_average", "backdrop_path"]}],
+        "no-confusing-arrow": ["error", {"onlyOneSimpleParam": true}],
+        "import/extensions": ["error", "ignorePackages", { "": "never", "js": "never" }],
+        "import/no-mutable-exports": "off",
+        "import/no-cycle": "off",
+        "linebreak-style": ["error", "windows"],
+        "implicit-arrow-linebreak": "off",
+        "object-shorthand": "off",
+        "prefer-template": "off",
+        "comma-dangle": "off"
+    }
+}
