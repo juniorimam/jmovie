@@ -30,14 +30,8 @@ const App = () => {
         e.preventDefault();
         window.scrollTo(0, 0);
         document.title = "JMovie";
-        main.innerHTML = Home(
-          popularMovie,
-          nowPlaying,
-          trendingMovie,
-          movieDetail
-        );
-      })
-    );
+        main.innerHTML = Home(popularMovie, nowPlaying, trendingMovie, movieDetail);
+      }));
 
     const trendingLink = document.querySelectorAll("#trending-link");
     trendingLink.forEach((link) =>
@@ -46,8 +40,7 @@ const App = () => {
         window.scrollTo(0, 0);
         document.title = "JMovie - Trending";
         main.innerHTML = MovieList(trendingMovie, "Trending");
-      })
-    );
+      }));
 
     const popularLink = document.querySelectorAll("#popular-link");
     popularLink.forEach((link) =>
@@ -56,8 +49,7 @@ const App = () => {
         window.scrollTo(0, 0);
         document.title = "JMovie - Popular";
         main.innerHTML = MovieList(popularMovie, "Popular");
-      })
-    );
+      }));
   };
 
   const fetchData = async () => {

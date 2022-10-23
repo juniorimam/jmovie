@@ -21,6 +21,7 @@
         "import/no-cycle": "off",
         "linebreak-style": ["error", "windows"],
         "implicit-arrow-linebreak": "off",
+        "no-await-in-loop": "off",
         "object-shorthand": "off",
         "prefer-template": "off",
         "comma-dangle": "off"
