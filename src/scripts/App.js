@@ -12,7 +12,45 @@ import {
 } from "./api/fetch";
 
 const App = () => {
-  const body = document.body;
+  const { body } = document;
+
+  const renderComponents = () => {
+    body.innerHTML = `
+        ${Header()}
+        <main class="bg-gradient-to-t from-slate-900 via-slate-800 to-slate-900 text-white">
+          ${Home(popularMovie, nowPlaying, trendingMovie, movieDetail)}
+        </main>
+        ${Footer()}
+      `;
+
+    const main = document.querySelector("main");
+    const moviesLink = document.querySelectorAll("#movies-link");
+    moviesLink.forEach((link) =>
+      link.addEventListener("click", (e) => {
+        e.preventDefault();
+        window.scrollTo(0, 0);
+        document.title = "JMovie";
+        main.innerHTML = Home(popularMovie, nowPlaying, trendingMovie, movieDetail);
+      }));
+
+    const trendingLink = document.querySelectorAll("#trending-link");
+    trendingLink.forEach((link) =>
+      link.addEventListener("click", (e) => {
+        e.preventDefault();
+        window.scrollTo(0, 0);
+        document.title = "JMovie - Trending";
+        main.innerHTML = MovieList(trendingMovie, "Trending");
+      }));
+
+    const popularLink = document.querySelectorAll("#popular-link");
+    popularLink.forEach((link) =>
+      link.addEventListener("click", (e) => {
+        e.preventDefault();
+        window.scrollTo(0, 0);
+        document.title = "JMovie - Popular";
+        main.innerHTML = MovieList(popularMovie, "Popular");
+      }));
+  };
 
   const fetchData = async () => {
     if (window.fetch) {
@@ -37,52 +75,6 @@ const App = () => {
         body.innerHTML = `<error-page data-code=500 data-message="INTERNAL SERVER ERROR" data-description="Oops, Something when wrong. Try to refresh this page." />`;
       }
     }
-  };
-
-  const renderComponents = () => {
-    body.innerHTML = `
-        ${Header()}
-        <main class="bg-gradient-to-t from-slate-900 via-slate-800 to-slate-900 text-white">
-          ${Home(popularMovie, nowPlaying, trendingMovie, movieDetail)}
-        </main>
-        ${Footer()}
-      `;
-
-    const main = document.querySelector("main");
-    const moviesLink = document.querySelectorAll("#movies-link");
-    moviesLink.forEach((link) =>
-      link.addEventListener("click", (e) => {
-        e.preventDefault();
-        window.scrollTo(0, 0);
-        document.title = "JMovie";
-        main.innerHTML = Home(
-          popularMovie,
-          nowPlaying,
-          trendingMovie,
-          movieDetail
-        );
-      })
-    );
-
-    const trendingLink = document.querySelectorAll("#trending-link");
-    trendingLink.forEach((link) => {
-      link.addEventListener("click", (e) => {
-        e.preventDefault();
-        window.scrollTo(0, 0);
-        document.title = "JMovie - Trending";
-        main.innerHTML = MovieList(trendingMovie, "Trending");
-      });
-    });
-
-    const popularLink = document.querySelectorAll("#popular-link");
-    popularLink.forEach((link) =>
-      link.addEventListener("click", (e) => {
-        e.preventDefault();
-        window.scrollTo(0, 0);
-        document.title = "JMovie - Popular";
-        main.innerHTML = MovieList(popularMovie, "Popular");
-      })
-    );
   };
 
   document.addEventListener("DOMContentLoaded", () => {
