@@ -58,12 +58,14 @@ const App = () => {
     }
 
     try {
+      let apiPage = 1;
       await getMovieDetail(process.env.TOP_MOVIE_ID);
       await getNowPlaying();
-      await getTrendingMovie(1);
-      await getTrendingMovie(2);
-      await getPopularMovie(1);
-      await getPopularMovie(2);
+      do {
+        apiPage += 1;
+        await getTrendingMovie(apiPage);
+        await getPopularMovie(apiPage);
+      } while (apiPage <= 3);
 
       renderComponents();
     } catch (error) {
