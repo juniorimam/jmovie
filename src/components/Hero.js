@@ -1,14 +1,6 @@
 import { limitText, limitDate } from "../scripts/utils";
 
-const Hero = ({
-  backdrop_path,
-  title,
-  overview,
-  release_date,
-  runtime,
-  vote_average,
-  homepage,
-}) => `
+const Hero = ({ backdrop_path, title, overview, release_date, runtime, vote_average, homepage }) => `
   <section class="min-h-screen sm:min-h-[60vh] lg:min-h-[75vh] bg-cover bg-center bg-no-repeat duration-300" style="background-image: url(${process.env.IMG_URL + backdrop_path})">
     <div class="min-w-full min-h-screen sm:min-h-[60vh] lg:min-h-[75vh] bg-gradient-to-t from-slate-900 via-slate-800/80 to-slate-700/80 duration-300">
       <div class="container mx-auto flex items-end min-w-full sm:min-w-min min-h-screen sm:min-h-[60vh] lg:min-h-[75vh] pb-14">
