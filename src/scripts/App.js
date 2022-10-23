@@ -1,5 +1,5 @@
 import { Footer, Header } from "../components";
-import { Home, Loading, Error, MovieList } from "../pages";
+import { Home, MovieList } from "../pages";
 import {
   movieDetail,
   nowPlaying,
@@ -16,7 +16,7 @@ const App = () => {
 
   const fetchData = async () => {
     if (window.fetch) {
-      body.innerHTML = Loading();
+      body.innerHTML = "<loading-page />";
     }
 
     try {
@@ -30,23 +30,11 @@ const App = () => {
       renderComponents();
     } catch (error) {
       if (error.message.includes("timeout")) {
-        body.innerHTML = Error(
-          408,
-          "REQUEST TIMEOUT",
-          "Check your internet connection, and try again."
-        );
+        body.innerHTML = `<error-page data-code=408 data-message="REQUEST TIMEOUT" data-description="Check your internet connection, and try again." />`;
       } else if (error.response.status === 404) {
-        body.innerHTML = Error(
-          404,
-          "NOT FOUND",
-          "Sorry, this page isn't available."
-        );
+        body.innerHTML = `<error-page data-code=404 data-message="NOT FOUND" data-description="Sorry, this page isn't available" />`;
       } else {
-        body.innerHTML = Error(
-          500,
-          "INTERNAL SERVER ERROR",
-          "Oops, Something when wrong. Try to refresh this page."
-        );
+        body.innerHTML = `<error-page data-code=500 data-message="INTERNAL SERVER ERROR" data-description="Oops, Something when wrong. Try to refresh this page." />`;
       }
     }
   };
@@ -67,7 +55,6 @@ const App = () => {
         e.preventDefault();
         window.scrollTo(0, 0);
         document.title = "JMovie";
-        window.history.pushState("", "", "/");
         main.innerHTML = Home(
           popularMovie,
           nowPlaying,
@@ -83,7 +70,6 @@ const App = () => {
         e.preventDefault();
         window.scrollTo(0, 0);
         document.title = "JMovie - Trending";
-        window.history.pushState("", "", "/trending");
         main.innerHTML = MovieList(trendingMovie, "Trending");
       });
     });
@@ -94,7 +80,6 @@ const App = () => {
         e.preventDefault();
         window.scrollTo(0, 0);
         document.title = "JMovie - Popular";
-        window.history.pushState("", "", "/popular");
         main.innerHTML = MovieList(popularMovie, "Popular");
       })
     );

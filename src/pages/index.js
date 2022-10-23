@@ -1,6 +1,6 @@
-import Error from "./Error";
 import Home from "./Home";
-import Loading from "./Loading";
 import MovieList from "./MovieList";
+import LoadingPage from "./LoadingPage";
+import ErrorPage from "./ErrorPage";
 
-export { Error, Home, Loading, MovieList };
+export { ErrorPage, Home, LoadingPage, MovieList };
