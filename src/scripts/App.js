@@ -30,8 +30,14 @@ const App = () => {
         e.preventDefault();
         window.scrollTo(0, 0);
         document.title = "JMovie";
-        main.innerHTML = Home(popularMovie, nowPlaying, trendingMovie, movieDetail);
-      }));
+        main.innerHTML = Home(
+          popularMovie,
+          nowPlaying,
+          trendingMovie,
+          movieDetail
+        );
+      })
+    );
 
     const trendingLink = document.querySelectorAll("#trending-link");
     trendingLink.forEach((link) =>
@@ -40,7 +46,8 @@ const App = () => {
         window.scrollTo(0, 0);
         document.title = "JMovie - Trending";
         main.innerHTML = MovieList(trendingMovie, "Trending");
-      }));
+      })
+    );
 
     const popularLink = document.querySelectorAll("#popular-link");
     popularLink.forEach((link) =>
@@ -49,7 +56,8 @@ const App = () => {
         window.scrollTo(0, 0);
         document.title = "JMovie - Popular";
         main.innerHTML = MovieList(popularMovie, "Popular");
-      }));
+      })
+    );
   };
 
   const fetchData = async () => {
@@ -58,14 +66,14 @@ const App = () => {
     }
 
     try {
-      let apiPage = 1;
+      let apiPage = 0;
       await getMovieDetail(process.env.TOP_MOVIE_ID);
       await getNowPlaying();
       do {
         apiPage += 1;
         await getTrendingMovie(apiPage);
         await getPopularMovie(apiPage);
-      } while (apiPage <= 3);
+      } while (apiPage < 3);
 
       renderComponents();
     } catch (error) {
